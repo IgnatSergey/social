@@ -1,0 +1,39 @@
+.profile-card {
+    display: flex;
+}
+
+.profile-card__photo {
+    width: 300px;
+    margin-right: 15px;
+    align-self: flex-start;
+    object-fit: contain;
+}
+
+.profile-card__description-list {
+    margin: 0;
+    margin-bottom: 15px;
+}
+
+.profile-card__description {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.term-name {
+    @include font-astra(20px, 18px, 400);
+    margin-bottom: 10px;
+}
+
+.profile-card__description-contacts {
+    margin-top: 10px;
+}
+
+.header-contacts:only-child {
+    display: none;
+}
+
+.button-edit {
+    @include font-astra();
+    align-self: flex-start;
+}

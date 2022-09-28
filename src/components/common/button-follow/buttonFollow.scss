@@ -1,0 +1,7 @@
+.users__followed {
+    align-self: flex-end;
+}
+
+.button-follow {
+    @include font-astra();
+}

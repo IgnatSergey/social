@@ -1,0 +1,28 @@
+.header-wrapper {
+  background-color: white;
+}
+
+.app-container {
+  margin: 0 auto;
+  padding: 0 30px;
+  box-sizing: border-box;
+  width: 1160px;
+}
+
+.header-wrapper {
+  height: 200%;
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  column-gap: 20px;
+  padding-bottom: 35px;
+}
+
+.content {
+  padding: 20px;
+  background-color: #abede0;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 5px white;
+}

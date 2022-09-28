@@ -1,0 +1,49 @@
+.login-input {
+    margin-right: 20px;
+}
+
+.login-header {
+    margin-top: 0px;
+}
+
+.login-form {
+    display: flex;
+    align-items: center;
+}
+
+.login-input-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-input-wrapper-checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.error {
+    color: red;
+}
+
+.login-captcha-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    width:250px;
+}
+
+.captcha {
+    margin-bottom: 10px;
+}
+
+.new-captcha {
+    margin-left: auto;
+}
+
+.new-captcha-imege {
+    width: 20px;
+}
+
+.captcha-input-wrapper {
+    display: flex;
+}
