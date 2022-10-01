@@ -1,5 +1,7 @@
 import React from "react";
 import { Formik, Field, Form } from "formik";
+import { useState, useEffect } from "react";
+import { validRequired } from "../common/validators/validators";
 
 export const ProfileEditMode = (props) => {
   const contactsArray = [
@@ -13,10 +15,19 @@ export const ProfileEditMode = (props) => {
     "mainLink",
   ];
 
+  const [disabledSaveButton, setDisabledSaveButton] = useState(true);
+
+  useEffect(() => {
+    return () => {
+      props.setErrorMessageProfile(null);
+    };
+  }, []);
+
   return (
     <div className="edit-mode">
       <div className="edit-mode__form">
         <Formik
+          disabledSaveButton={disabledSaveButton}
           initialValues={{
             ...props.profile,
             ...props.profile.contacts,
@@ -40,16 +51,16 @@ export const ProfileEditMode = (props) => {
                 contacts: { ...contacts },
               };
             });
-            console.log(resultValues);
             props.updateStatus(values.status);
             props.updateProfileThunkCreator(resultValues);
             if (values.file !== null) {
               props.updatePhoto(values.file);
             }
+            setDisabledSaveButton(true);
           }}
         >
           {(props) => (
-            <Form>
+            <Form onChange={() => setDisabledSaveButton(false)}>
               <div className="edit-profile-mode__list">
                 <div className="edit-profile-mode__list-item">
                   <label
@@ -64,7 +75,11 @@ export const ProfileEditMode = (props) => {
                     id="fullName"
                     type="text"
                     component="input"
+                    validate={validRequired}
                   />
+                  {props.errors.fullName && props.touched.fullName && (
+                    <div className="error">{props.errors.fullName}</div>
+                  )}
                 </div>
                 <div className="edit-profile-mode__list-item">
                   <label
@@ -157,15 +172,19 @@ export const ProfileEditMode = (props) => {
               </div>
               <div className="edit-profile-mode__button-save-wrapper">
                 <button
+                  disabled={disabledSaveButton}
                   className="edit-profile-mode__button-save"
                   type="submit"
                 >
-                  Save
+                  Save changes
                 </button>
               </div>
             </Form>
           )}
         </Formik>
+        {props.errorMessage && (
+          <div className="error">{props.errorMessage}</div>
+        )}
       </div>
       <button onClick={() => props.onToggleEditMode(false)}>
         Back to profile

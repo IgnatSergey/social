@@ -12,6 +12,7 @@ import {
   updateProfileThunkCreator,
   updateProfileStatusThunkCreator,
   updateProfilePhotoThunkCreator,
+  setErrorMessageProfile
 } from "../../redux/profile-reducer";
 import {
   getProfile,
@@ -20,6 +21,7 @@ import {
   getFetchingStatus,
   getTypeProfile,
   getEditModeStatus,
+  getErrorMessage,
 } from "../../redux/profile-selectore";
 import { Profile } from "./Profile";
 import { useParams } from "react-router-dom";
@@ -27,6 +29,7 @@ import { Preloader } from "../common/preloader/Preloader";
 import { getFollowingInProcess } from "../../redux/following-selector";
 import { getMyUserId } from "../../redux/auth-selector";
 import { WithAuthRedirect } from "../hoc/WithAuthRedirect";
+
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
@@ -69,6 +72,8 @@ class ProfileContainer extends React.Component {
         updateProfileThunkCreator={this.props.updateProfileThunkCreator}
         updateStatus={this.props.updateProfileStatusThunkCreator}
         updatePhoto={this.props.updateProfilePhotoThunkCreator}
+        errorMessage={this.props.errorMessage}
+        setErrorMessageProfile={this.props.setErrorMessageProfile}
       />
     );
   }
@@ -84,6 +89,7 @@ const mapStateToProps = (state) => {
     myUserId: getMyUserId(state),
     isMyProfile: getTypeProfile(state),
     isEditMode: getEditModeStatus(state),
+    errorMessage: getErrorMessage(state)
   };
 };
 
@@ -106,6 +112,7 @@ export default compose(
     updateProfileThunkCreator,
     updateProfileStatusThunkCreator,
     updateProfilePhotoThunkCreator,
+    setErrorMessageProfile
   }),
   WithAuthRedirect,
   componentWithRouterParameterWrapper

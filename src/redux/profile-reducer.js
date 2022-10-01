@@ -2,6 +2,7 @@ import { profileAPI, usersAPI } from "../api/api";
 import { followUnfollowFlow } from "./following-reducer";
 
 const SET_PROFILE = 'SET-PROFILE';
+const GET_PROFILE_ERROR = 'GET-PROFILE-ERROR';
 const SET_STATUS = 'SET-STATUS';
 const SET_FOLLOWING_STATUS = 'SET-FOLLOWED-STATUS';
 const FOLLOW = 'FOLLOW_AT_PROFILE';
@@ -16,14 +17,15 @@ let initialState = {
     isFollowed: false,
     isFetching: true,
     isMyProfile: false,
-    isEditMode: false
+    isEditMode: false,
+    errorMessage: null,
 }
 
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_PROFILE: {
             return {
-                ...state, profile: {...action.profile, contacts: action.profile.contacts}
+                ...state, profile: { ...action.profile, contacts: action.profile.contacts }
             }
         }
         case SET_STATUS: {
@@ -56,6 +58,10 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state, isEditMode: action.isEditMode
             }
+        case GET_PROFILE_ERROR:
+            return {
+                ...state, errorMessage: action.errorMessage
+            }
         default:
             return state;
     }
@@ -63,6 +69,10 @@ const profileReducer = (state = initialState, action) => {
 
 const getProfile = (profile) => {
     return { type: SET_PROFILE, profile }
+}
+
+export const setErrorMessageProfile = (errorMessage) => {
+    return { type: GET_PROFILE_ERROR, errorMessage }
 }
 
 export const getProfileThunkCreator = (userId) => {
@@ -139,9 +149,12 @@ export const toggleEditMode = (isEditMode) => {
 export const updateProfileThunkCreator = (profile) => {
     return async (dispatch) => {
         const data = await profileAPI.updateProfile(profile);
-        console.log(data);
         if (data.resultCode === 0) {
             dispatch(getProfile(profile));
+        }
+        else {
+            const errorMessage = data.messages.length > 0 ? data.messages[0] : 'some error';
+            dispatch(setErrorMessageProfile(errorMessage))
         }
     }
 }

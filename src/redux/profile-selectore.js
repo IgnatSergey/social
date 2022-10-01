@@ -25,3 +25,7 @@ export const getTypeProfile = (state) => {
 export const getEditModeStatus = (state) => {
     return state.profilePage.isEditMode;
 }
+
+export const getErrorMessage = (state) => {
+    return state.profilePage.errorMessage;
+}

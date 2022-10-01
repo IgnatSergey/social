@@ -64,12 +64,10 @@ export const getCaptchaThunkCreater = () => {
 export const login = (email, password, rememberMe, captcha = null) => {
     return async (dispatch) => {
         let response = await authAPI.login(email, password, rememberMe, captcha);
-        console.log(response.data.resultCode);
         if (response.data.resultCode === 0) {
             dispatch(getMeThunkCreator());
         } else if (response.data.resultCode === 10) {
             let urlCaptcha = await securityAPI.getCaptcha();
-            console.log(urlCaptcha);
             dispatch(setCaptcha(urlCaptcha))
             dispatch(setErrorMessage("Enter code"))
         } else {
@@ -81,7 +79,6 @@ export const login = (email, password, rememberMe, captcha = null) => {
 
 export const logout = () => {
     return async (dispatch) => {
-        console.log('sdsds');
         let response = await authAPI.logout();
         if (response.data.resultCode === 0) {
             dispatch(setMyProfileData(null, null, null, false));

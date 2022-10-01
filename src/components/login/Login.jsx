@@ -18,7 +18,6 @@ import { validRequired } from "../common/validators/validators";
 import newCaptchaPhoto from "../../assets/new-captcha-button.png";
 
 const LoginForm = (props) => {
-  console.log(props);
   return (
     <>
       <h1 className="login-header">Authorization</h1>

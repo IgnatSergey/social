@@ -27,7 +27,6 @@ export const getFollowStatus = (state) => {
 }
 
 export const getFollowingStatus = (state, userId) => {
-    console.log(state.usersPage.users);
     const currentUser = state.usersPage.users.find(user => user.id === userId);
     return currentUser.followed;
 }

@@ -36,6 +36,7 @@ class App extends React.Component {
                   path="/"
                   element={<Navigate to={`/profile/${this.props.userId}`} />}
                 />
+                {/* <Route path="/*" element={<Login />} /> */}
                 <Route path="/users/" element={<UsersContainer />} />
                 <Route path="/profile/:userId" element={<ProfileContainer />} />
                 <Route path="/login" element={<Login />} />
