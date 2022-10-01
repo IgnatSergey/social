@@ -151,6 +151,7 @@ export const updateProfileThunkCreator = (profile) => {
         const data = await profileAPI.updateProfile(profile);
         if (data.resultCode === 0) {
             dispatch(getProfile(profile));
+            dispatch(setErrorMessageProfile(null))
         }
         else {
             const errorMessage = data.messages.length > 0 ? data.messages[0] : 'some error';

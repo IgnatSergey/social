@@ -66,6 +66,7 @@ export const login = (email, password, rememberMe, captcha = null) => {
         let response = await authAPI.login(email, password, rememberMe, captcha);
         if (response.data.resultCode === 0) {
             dispatch(getMeThunkCreator());
+            dispatch(setErrorMessage(null));
         } else if (response.data.resultCode === 10) {
             let urlCaptcha = await securityAPI.getCaptcha();
             dispatch(setCaptcha(urlCaptcha))
