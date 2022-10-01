@@ -102,6 +102,7 @@ const LoginForm = (props) => {
         )}
       </Formik>
       {props.errorMessage && <div className="error">{props.errorMessage}</div>}
+      <p>Тестовый логин: ignatsergeu@gmail.com Пароль: honey</p>
     </>
   );
 };
